@@ -1,0 +1,118 @@
+{% extends 'gallery/base.html' %} {% block content %}
+<style>
+  .form-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #f4f4fb;
+    border-radius: 20px;
+    box-shadow: 8px 8px 20px #d1d1e0, -8px -8px 20px #ffffff;
+  }
+
+  .form-container label {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+    display: flex;
+    color: #4b3f72;
+  }
+  .form-container textarea {
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 12px;
+    background: #e0e5ec;
+    box-shadow: inset 2px 2px 6px #babecc, inset -2px -2px 6px #ffffff;
+    font-size: 1em;
+    color: #333;
+    resize: none;
+  }
+
+  #id_title {
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 12px;
+    background: #e0e5ec;
+    box-shadow: inset 2px 2px 6px #babecc, inset -2px -2px 6px #ffffff;
+    font-size: 1em;
+    color: #333;
+    resize: none;
+  }
+
+  #id_url {
+    width: 95%;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 12px;
+    background: #e0e5ec;
+    box-shadow: inset 2px 2px 6px #babecc, inset -2px -2px 6px #ffffff;
+    font-size: 1em;
+    color: #333;
+    resize: none;
+  }
+
+  .btn-primary {
+    text-decoration: none;
+    color: #5c5470;
+    margin: 0 10px;
+    padding: 10px 20px;
+    background: #e0e5ec;
+    border-radius: 10px;
+    box-shadow: inset 6px 6px 12px #c5c9d1, inset -6px -6px 12px #fbffff;
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary:hover {
+    box-shadow: 6px 6px 12px #c5c9d1, -6px -6px 12px #fbffff;
+    color: #4b3f72;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .color-primary {
+    color: #4b3f72;
+  }
+
+  .no-underline-black {
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .no-underline-black:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<h2 class="text-center color-primary">➕ Add a Special Link</h2>
+
+<div class="form-container" style="margin-top: 30px">
+  <form method="post">
+    {% csrf_token %}
+
+    <label for="id_title">Title</label>
+    {{ form.title }}
+
+    <label for="id_url">URL</label>
+    {{ form.url }}
+
+    <label for="id_description">Description (optional)</label>
+    {{ form.description }}
+
+    <div class="text-center" style="margin-top: 20px">
+      <button type="submit" class="btn-primary">Save Link</button>
+    </div>
+  </form>
+</div>
+
+<div class="text-center" style="margin-top: 20px">
+  <a href="{% url 'links' %}" class="color-primary no-underline-black"
+    >⬅️ Back to Links</a
+  >
+</div>
+{% endblock %}

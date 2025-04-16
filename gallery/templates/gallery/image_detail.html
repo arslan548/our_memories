@@ -1,0 +1,68 @@
+{% extends 'gallery/base.html' %} {% block content %}
+<div class="image-detail-container">
+  <h2>{{ image.title }}</h2>
+
+  <img src="{{ image.image.url }}" alt="{{ image.title }}" />
+
+  <div class="image-actions">
+    <a href="{{ image.image.url }}" download class="neumorphic-btn">Download</a>
+    <a href="{% url 'images' %}" class="neumorphic-btn back-btn">Go Back</a>
+  </div>
+</div>
+
+<style>
+  .image-detail-container {
+    text-align: center;
+    padding: 40px;
+    background: #e0e5ec;
+    margin: 40px auto;
+    max-width: 800px;
+    border-radius: 30px;
+    box-shadow: 10px 10px 20px #babecc, -10px -10px 20px #ffffff;
+  }
+
+  .image-detail-container h2 {
+    color: #4b3f72;
+    margin-bottom: 20px;
+  }
+
+  .image-detail-container img {
+    max-width: 90%;
+    max-height: 500px;
+    border-radius: 20px;
+    box-shadow: 4px 4px 10px #babecc, -4px -4px 10px #ffffff;
+    transition: transform 0.2s ease;
+  }
+
+  .image-detail-container img:hover {
+    transform: scale(1.02);
+  }
+
+  .image-actions {
+    margin-top: 30px;
+  }
+
+  .neumorphic-btn {
+    display: inline-block;
+    background: #e0e5ec;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 25px;
+    margin: 10px;
+    font-weight: bold;
+    color: #4b3f72;
+    text-decoration: none;
+    box-shadow: 4px 4px 8px #babecc, -4px -4px 8px #ffffff;
+    transition: 0.3s ease;
+    cursor: pointer;
+  }
+
+  .neumorphic-btn:hover {
+    box-shadow: inset 2px 2px 6px #babecc, inset -2px -2px 6px #ffffff;
+  }
+
+  .back-btn {
+    background: #d1d5db;
+  }
+</style>
+{% endblock %}

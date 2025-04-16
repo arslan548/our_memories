@@ -1,0 +1,136 @@
+{% extends 'gallery/base.html' %} {% load static %} {% block content %}
+{% comment %} <link rel="stylesheet" href="{% static 'css/links.css' %}" /> {% endcomment %}
+
+<h2 class="title">Special Links 🔗</h2>
+
+<div class="div-center">
+  <a href="{% url 'add_link' %}">
+    <button class="neumorphic-btn add-link-btn">➕ Add Link</button>
+  </a>
+</div>
+
+{% if links %}
+<div class="links-grid">
+  {% for link in links %}
+  <div
+    class="link-card"
+    onclick="location.href='{% url 'link_detail' link.id %}'"
+  >
+    <h3 class="link-title">{{ link.title }}</h3>
+    {% if link.description %}
+    <p class="link-description">{{ link.description }}</p>
+    {% endif %}
+    <a
+      href="{{ link.url }}"
+      target="_blank"
+      class="neumorphic-btn visit-btn"
+      onclick="event.stopPropagation();"
+      >Visit 🔗</a
+    >
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<p class="no-links">No links added yet 😢</p>
+{% endif %}
+
+<style>
+  .title {
+    text-align: center;
+    color: #4b3f72;
+    font-size: 2em;
+    margin-bottom: 30px;
+  }
+
+  .div-center {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .links-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    padding: 0 20px;
+  }
+
+  .link-card {
+    background: #e0e5ec;
+    border-radius: 20px;
+    box-shadow: 8px 8px 16px #babecc, -8px -8px 16px #ffffff;
+    padding: 20px;
+    width: 260px;
+    height: 250px; /* Fixed height */
+    text-align: center;
+    transition: transform 0.2s ease;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .link-card:hover {
+    transform: scale(1.02);
+  }
+
+  .link-title {
+    color: #7f3d7f;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .link-description {
+    font-size: 0.95em;
+    color: #555;
+    margin-bottom: 15px;
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .no-links {
+    text-align: center;
+    color: #888;
+    font-size: 1.2em;
+    margin-top: 40px;
+  }
+
+  .neumorphic-btn {
+    background: #e0e5ec;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 20px;
+    font-weight: bold;
+    color: #4b3f72;
+    text-decoration: none;
+    box-shadow: 4px 4px 8px #babecc, -4px -4px 8px #ffffff;
+    transition: all 0.3s ease;
+    display: inline-block;
+  }
+
+  .neumorphic-btn:hover {
+    box-shadow: inset 2px 2px 6px #babecc, inset -2px -2px 6px #ffffff;
+  }
+
+  .visit-btn {
+    background-color: #d0b3f0;
+    color: #4b3f72;
+    z-index: 2;
+  }
+
+  .add-link-btn {
+    font-size: 1em;
+    padding: 12px 28px;
+  }
+</style>
+
+
+{% endblock %}

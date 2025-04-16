@@ -1,0 +1,179 @@
+{% extends 'gallery/base.html' %}
+
+{% block content %}
+<h2 style="text-align: center; color: #4b3f72; display: flex; align-items: center; justify-content: center; gap: 10px;">
+  <img src="https://cdn-icons-png.flaticon.com/512/1829/1829586.png" width="28" height="28" alt="icon" />
+  Our Video Memories
+</h2>
+
+<form method="POST" enctype="multipart/form-data" class="neumorphic-form">
+  {% csrf_token %}
+  <div class="form-group">
+    <label for="id_title">Title:</label><br />
+    {{ form.title }}
+  </div>
+
+  <div class="form-group">
+    <label for="id_video_file">Video File:</label><br />
+    <div class="file-input-wrapper">
+      {{ form.video_file }}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="id_youtube_link">YouTube Link:</label><br />
+    {{ form.youtube_link }}
+  </div>
+
+  <div style="text-align: center;">
+    <button type="submit" class="neumorphic-btn">Upload</button>
+  </div>
+</form>
+
+<div class="gallery-wrapper">
+  {% for video in videos %}
+    <div class="video-card">
+      <a href="{% url 'video_detail' video.id %}">
+        {% if video.video_file %}
+          <video class="video-preview" src="{{ video.video_file.url }}" controls muted></video>
+        {% elif video.youtube_link %}
+          {% with thumbnail_url=video.get_youtube_thumbnail_url %}
+            {% if thumbnail_url %}
+              <img class="video-preview" src="{{ thumbnail_url }}" alt="{{ video.title }} thumbnail" />
+            {% else %}
+              <iframe class="video-preview" src="{{ video.youtube_link }}" frameborder="0" allowfullscreen></iframe>
+            {% endif %}
+          {% endwith %}
+        {% endif %}
+        <div class="video-info">
+          <h4 class="video-title">{{ video.title }}</h4>
+          {% if video.youtube_link %}
+            <p class="video-type">YouTube Video</p>
+          {% elif video.video_file %}
+            <p class="video-type">Uploaded Video</p>
+          {% endif %}
+        </div>
+      </a>
+    </div>
+  {% endfor %}
+</div>
+
+<style>
+  .neumorphic-form {
+    text-align: center;
+    margin: 30px auto;
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 20px;
+    background: #e0e5ec;
+    box-shadow: 8px 8px 16px #babecc, -8px -8px 16px #ffffff;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+    color: #4b3f72;
+    font-weight: bold;
+  }
+
+  .form-group input[type="text"],
+  .form-group input[type="url"],
+  .form-group input[type="file"] {
+    width: 90%;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    background: #e0e5ec;
+    box-shadow: inset 2px 2px 6px #babecc, inset -2px -2px 6px #ffffff;
+    outline: none;
+    font-size: 1em;
+  }
+
+  .file-input-wrapper {
+    display: inline-block;
+    padding: 10px 15px;
+    background: #e0e5ec;
+    border-radius: 12px;
+    box-shadow: inset 2px 2px 6px #babecc, inset -2px -2px 6px #ffffff;
+    cursor: pointer;
+  }
+
+  .file-input-wrapper input[type="file"] {
+    cursor: pointer;
+    background: transparent;
+    color: #4b3f72;
+  }
+
+  .neumorphic-btn {
+    background: #e0e5ec;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 25px;
+    font-weight: bold;
+    color: #4b3f72;
+    box-shadow: 2px 2px 5px #babecc, -2px -2px 5px #ffffff;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+
+  .neumorphic-btn:hover {
+    box-shadow: inset 2px 2px 6px #babecc, inset -2px -2px 6px #ffffff;
+  }
+
+  .gallery-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .video-card {
+    width: 300px;
+    height: auto;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 4px 4px 12px #babecc, -4px -4px 12px #ffffff;
+    transition: transform 0.2s ease;
+    background-color: #f8e8ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .video-card:hover {
+    transform: scale(1.05);
+  }
+
+  .video-preview {
+    width: 100%;
+    height: 160px;
+    border-radius: 20px 20px 0 0;
+    object-fit: cover;
+  }
+
+  iframe.video-preview {
+    border-radius: 20px 20px 0 0;
+  }
+
+  .video-info {
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .video-title {
+    color: #4b3f72;
+    font-weight: bold;
+    font-size: 1.2em;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .video-type {
+    color: gray;
+    margin-top: 5px;
+  }
+</style>
+{% endblock %}

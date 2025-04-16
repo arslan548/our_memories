@@ -1,0 +1,95 @@
+{% extends 'gallery/base.html' %} {% load static %} {% block content %}
+<style>
+  body {
+    background: #dcdff2;
+    font-family: "Segoe UI", sans-serif;
+    color: #5e4a77;
+  }
+
+  .text-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .color-primary {
+    color: #5a4e6d;
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+  iframe,
+  video {
+    border-radius: 20px;
+    box-shadow: 10px 10px 20px #c9cce0, -10px -10px 20px #ffffff;
+    background: #e6eafc;
+  }
+
+  .btn-primary,
+  .btn-danger,
+  .btn-secondary {
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    background: #e6eafc;
+    color: #5e4a77;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    box-shadow: 6px 6px 12px #c9cce0, -6px -6px 12px #ffffff;
+  }
+
+  .btn-primary:hover,
+  .btn-danger:hover,
+  .btn-secondary:hover {
+    box-shadow: inset 4px 4px 8px #c9cce0, inset -4px -4px 8px #ffffff;
+  }
+
+  .btn-danger {
+    color: #ff4b5c;
+  }
+
+  .btn-secondary {
+    color: #5e4a77;
+  }
+</style>
+
+<div class="text-center" style="padding: 40px">
+  <h2 class="color-primary">{{ video.title }}</h2>
+
+  {% if video.youtube_link %} {% with video.get_youtube_video_id as video_id %}
+  {% if video_id %}
+  <iframe
+    width="80%"
+    height="400"
+    src="https://www.youtube.com/embed/{{ video_id }}"
+    frameborder="0"
+    allowfullscreen
+  ></iframe>
+  {% else %}
+  <p>Invalid YouTube link.</p>
+  {% endif %} {% endwith %} {% elif video.video_file %}
+  <video width="80%" height="400" controls class="rounded">
+    <source src="{{ video.video_file.url }}" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+  {% endif %}
+
+  <div style="margin-top: 30px">
+    {% if video.video_file %}
+    <a
+      href="{{ video.video_file.url }}"
+      download
+      class="btn-primary"
+      style="margin-right: 15px"
+      >Download</a
+    >
+    {% endif %}
+
+    <a href="{% url 'videos' %}" class="btn-secondary" style="margin-left: 15px"
+      >Go Back</a
+    >
+  </div>
+</div>
+{% endblock %}

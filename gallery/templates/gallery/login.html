@@ -1,0 +1,135 @@
+<style>
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #e0e5ec;
+    color: #333;
+  }
+  header {
+    background: #e0e5ec;
+    box-shadow: 8px 8px 16px #c5c9d1, -8px -8px 16px #fbffff;
+    padding: 20px;
+    text-align: center;
+    border-radius: 15px;
+    margin: 20px;
+  }
+
+  header h1 {
+    margin: 0;
+    font-size: 2rem;
+    color: #5c5470;
+    text-shadow: 1px 1px 0 #fff;
+  }
+
+  .title-login {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #5a4e6d;
+    margin-top: 50px;
+  }
+
+  .login-form {
+    background: #e6eafc;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 10px 10px 20px #c9cce0, -10px -10px 20px #ffffff;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .login-label {
+    align-self: flex-start;
+    margin: 10px 0 5px 5px;
+    color: #5e4a77;
+    font-weight: 600;
+  }
+
+  .login-input {
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    border: none;
+    background: #e6eafc;
+    box-shadow: inset 6px 6px 10px #c9cce0, inset -6px -6px 10px #ffffff;
+    font-size: 16px;
+    color: #444;
+  }
+
+  .login-input:focus {
+    outline: none;
+    box-shadow: inset 4px 4px 8px #c9cce0, inset -4px -4px 8px #ffffff;
+  }
+
+  .login-button {
+    padding: 10px 30px;
+    border-radius: 25px;
+    border: none;
+    background: #e6eafc;
+    box-shadow: 6px 6px 12px #c9cce0, -6px -6px 12px #ffffff;
+    font-size: 16px;
+    color: #5e4a77;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .login-button:hover {
+    box-shadow: inset 4px 4px 8px #c9cce0, inset -4px -4px 8px #ffffff;
+  }
+
+  .error-message {
+    color: #ff4b5c;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  .homepage {
+    
+  }
+
+  .homepage {
+    text-decoration: none;
+    font-weight: bold;
+    color: #4b3f72;
+    margin-top: 5px;
+  }
+
+  .homepage:hover {
+    text-decoration: underline;
+  }
+</style>
+<header>
+  <h1>ArsMan's Memories</h1>
+</header>
+<h2 class="title-login">Who Are We?</h2>
+
+{% if error_message %}
+<p class="error-message">{{ error_message }}</p>
+{% endif %}
+<center>
+  <form method="POST" class="login-form">
+    {% csrf_token %}
+    <label for="username" class="login-label">Our Name</label>
+    <input
+      type="text"
+      name="username"
+      id="username"
+      required
+      class="login-input"
+    />
+
+    <label for="password" class="login-label">Our Key</label>
+    <input
+      type="password"
+      name="password"
+      id="password"
+      required
+      class="login-input"
+    />
+
+    <button type="submit" class="login-button">Enter Our Memories</button>
+    <a href="{% url 'home' %}" class="homepage">Back To Home!</a>
+  </form>
+</center>

@@ -1,0 +1,116 @@
+{% extends 'gallery/base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+  .title {
+    text-align: center;
+    font-size: 2em;
+    color: #4b3f72;
+    margin: 30px 0;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  .div-center {
+    text-align: center;
+    margin-bottom: 25px;
+  }
+
+  .button-add-note {
+    text-decoration: none;
+    color: #5c5470;
+    margin: 0 10px;
+    padding: 10px 20px;
+    background: #e0e5ec;
+    border-radius: 10px;
+    box-shadow: inset 6px 6px 12px #c5c9d1, inset -6px -6px 12px #fbffff;
+    transition: all 0.3s ease;
+  }
+
+  .button-add-note:hover {
+    box-shadow: 6px 6px 12px #c5c9d1, -6px -6px 12px #fbffff;
+    color:#4b3f72;
+  }
+
+  #board {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .note {
+    width: 220px;
+    height: 220px;
+    background-color: #fff0f5;
+    border-radius: 12px;
+    box-shadow: 6px 6px 16px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    font-family: 'Segoe UI', sans-serif;
+    position: relative;
+    transition: transform 0.2s;
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .note:hover {
+    transform: scale(1.03);
+  }
+
+  .note-link {
+    text-decoration: none;
+    color: #4b3f72;
+    overflow: hidden;
+    height: 100%;
+  }
+
+  .note-link h4 {
+    font-size: 1.1em;
+    margin-bottom: 8px;
+    max-height: 2.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .note-link p {
+    font-size: 0.95em;
+    color: #555;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+  }
+
+  .no-notes {
+    text-align: center;
+    font-size: 1.1em;
+    color: #999;
+  }
+</style>
+
+<h2 class="title">Sticky Notes Board 🧷</h2>
+
+<div class="div-center">
+  <a href="{% url 'add_note' %}">
+    <button class="button-add-note">➕ Add Note</button>
+  </a>
+</div>
+
+<div id="board">
+  {% for note in notes %}
+    <div class="note" data-note-id="{{ note.pk }}">
+      <a href="{% url 'note_detail' note.pk %}" class="note-link">
+        <h4>{{ note.title }}</h4>
+        <p>{{ note.content|default:"(No Content)" }}</p>
+      </a>
+    </div>
+  {% empty %}
+    <p class="no-notes">No notes yet 😢</p>
+  {% endfor %}
+</div>
+{% endblock %}

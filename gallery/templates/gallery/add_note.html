@@ -1,0 +1,69 @@
+{% extends 'gallery/base.html' %}
+{% block content %}
+
+<style>
+  .form-wrapper {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 25px;
+    background-color: #f9f4ff;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(127, 61, 127, 0.1);
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  .form-wrapper h2 {
+    text-align: center;
+    color: #4b3f72;
+    margin-bottom: 20px;
+  }
+
+  .form-wrapper input,
+  .form-wrapper textarea {
+    width: 100%;
+    padding: 12px 15px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 1em;
+    transition: 0.2s;
+    box-sizing: border-box;
+  }
+
+  .form-wrapper input:focus,
+  .form-wrapper textarea:focus {
+    outline: none;
+    border-color: #b799ff;
+    box-shadow: 0 0 6px #dab6ff;
+  }
+
+  .form-wrapper button {
+    text-decoration: none;
+    color: #5c5470;
+    margin: 0 10px;
+    padding: 10px 20px;
+    background: #e0e5ec;
+    border-radius: 10px;
+    box-shadow: inset 6px 6px 12px #c5c9d1, inset -6px -6px 12px #fbffff;
+    transition: all 0.3s ease;
+  }
+
+  .form-wrapper button:hover {
+    box-shadow: 6px 6px 12px #c5c9d1, -6px -6px 12px #fbffff;
+    color: #4b3f72;
+  }
+</style>
+
+<div class="form-wrapper">
+  <h2>Add a New Note 📝</h2>
+  <form method="POST">
+    {% csrf_token %}
+    <input name="title" placeholder="Note Title" required>
+    <textarea name="content" placeholder="Write your heart out 💖" rows="6" required></textarea>
+    <div style="text-align: center;">
+      <button type="submit">Save Note</button>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

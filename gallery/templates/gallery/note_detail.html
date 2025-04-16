@@ -1,0 +1,59 @@
+{% extends 'gallery/base.html' %} {% load static %} {% block content %}
+<style>
+  .note-detail-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+  }
+
+  .note-card {
+    background: #f8f0ff;
+    border-radius: 20px;
+    box-shadow: 8px 8px 20px #d1c3e0, -8px -8px 20px #ffffff;
+    padding: 40px;
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+  }
+
+  .note-title {
+    font-size: 28px;
+    color: #7f3d7f;
+    margin-bottom: 20px;
+  }
+
+  .note-content {
+    font-size: 18px;
+    color: #444;
+    white-space: pre-line;
+  }
+
+  .back-button {
+    margin-top: 30px;
+    background-color: #a063a0;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .back-button:hover {
+    background-color: #8a4d89;
+  }
+</style>
+
+<div class="note-detail-container">
+  <div class="note-card">
+    <h2 class="note-title">{{ note.title }}</h2>
+    <p class="note-content">{{ note.content }}</p>
+
+    <a href="{% url 'notes' %}">
+      <button class="back-button">⬅️ Go Back</button>
+    </a>
+  </div>
+</div>
+{% endblock %}

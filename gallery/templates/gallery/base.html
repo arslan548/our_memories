@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Memory Gallery</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #e0e5ec;
+        color: #333;
+      }
+
+      header {
+        background: #e0e5ec;
+        box-shadow:  8px 8px 16px #c5c9d1,
+                    -8px -8px 16px #fbffff;
+        padding: 20px;
+        text-align: center;
+        border-radius: 15px;
+        margin: 20px;
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 2rem;
+        color: #5c5470;
+        text-shadow: 1px 1px 0 #fff;
+      }
+
+      .nav-links {
+        margin-top: 10px;
+      }
+      .link1 {
+        text-decoration: none;
+        color: #5c5470;
+        margin: 0 10px;
+        padding: 10px 20px;
+        background: #e0e5ec;
+        border-radius: 10px;
+        box-shadow: inset 6px 6px 12px #c5c9d1, inset -6px -6px 12px #fbffff;
+        transition: all 0.3s ease;
+      }
+
+      .link1:hover {
+        box-shadow: 6px 6px 12px #c5c9d1, -6px -6px 12px #fbffff;
+        color: #7f3d7f;
+      }
+
+      .link {
+        text-decoration: none;
+        color: #5c5470;
+        margin: 0 10px;
+        transition: all 0.3s ease;
+      }
+
+      .link:hover {
+        color: #7f3d7f;
+      }
+
+      .content {
+        padding: 20px;
+        margin: 20px;
+        border-radius: 15px;
+        background: #e0e5ec;
+        box-shadow:  8px 8px 16px #c5c9d1,
+                    -8px -8px 16px #fbffff;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>💫ArsMan's Memories♥️✨</h1>
+      {% if user.is_authenticated %}
+      <nav class="nav-links">
+        <a href="/" class="link">Home</a>
+        <a href="/images/" class="link">Images</a>
+        <a href="/videos/" class="link">Videos</a>
+        <a href="/links/" class="link">Links</a>
+        <a href="/notes/" class="link">Notes</a>
+        <a href="{% url 'logout' %}" class="link">Logout</a>
+      </nav>
+      {% else %}
+      <nav class="nav-links">
+        <a href="{% url 'login' %}" class="link1">🔓Unlock All The Memories We Hold!</a>
+      </nav>
+      {% endif %}
+    </header>
+
+    <div class="content">
+      {% block content %} {% endblock %}
+    </div>
+  </body>
+</html>

@@ -1,0 +1,137 @@
+{% extends 'gallery/base.html' %}
+
+{% block content %}
+<h2 style="text-align: center; color: #4b3f72; display: flex; align-items: center; justify-content: center; gap: 10px;">
+  <img src="https://cdn-icons-png.flaticon.com/512/1829/1829586.png" width="28" height="28" alt="icon" />
+  Our Image Gallery
+</h2>
+
+<form method="POST" enctype="multipart/form-data" class="neumorphic-form">
+  {% csrf_token %}
+  <div class="form-group">
+    <label for="id_title">Title:</label><br />
+    {{ form.title }}
+  </div>
+
+  <div class="form-group">
+    <label for="id_image">Image:</label><br />
+    <div class="file-input-wrapper">
+      {{ form.image }}
+    </div>
+  </div>
+
+  <div style="text-align: center;">
+    <button type="submit" class="neumorphic-btn">Upload</button>
+  </div>
+</form>
+
+<div class="gallery-wrapper">
+  {% for image in images %}
+    <div class="image-card">
+      <a href="{% url 'image_detail' image.id %}">
+        <img src="{{ image.image.url }}" alt="{{ image.title }}" />
+      </a>
+      <div class="image-title">{{ image.title }}</div>
+    </div>
+  {% endfor %}
+</div>
+
+<style>
+  .neumorphic-form {
+    text-align: center;
+    margin: 30px auto;
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 20px;
+    background: #e0e5ec;
+    box-shadow: 8px 8px 16px #babecc, -8px -8px 16px #ffffff;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+    color: #4b3f72;
+    font-weight: bold;
+  }
+
+  .form-group input[type="text"] {
+    width: 90%;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    background: #e0e5ec;
+    box-shadow: inset 2px 2px 6px #babecc, inset -2px -2px 6px #ffffff;
+    outline: none;
+    font-size: 1em;
+  }
+
+  .file-input-wrapper {
+    display: inline-block;
+    padding: 10px 15px;
+    background: #e0e5ec;
+    border-radius: 12px;
+    box-shadow: inset 2px 2px 6px #babecc, inset -2px -2px 6px #ffffff;
+    cursor: pointer;
+  }
+
+  .file-input-wrapper input[type="file"] {
+    cursor: pointer;
+    background: transparent;
+    color: #4b3f72;
+  }
+
+  .neumorphic-btn {
+    background: #e0e5ec;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 25px;
+    font-weight: bold;
+    color: #4b3f72;
+    box-shadow: 2px 2px 5px #babecc, -2px -2px 5px #ffffff;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+
+  .neumorphic-btn:hover {
+    box-shadow: inset 2px 2px 6px #babecc, inset -2px -2px 6px #ffffff;
+  }
+
+  .gallery-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .image-card {
+    width: 200px;
+    height: auto;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 4px 4px 12px #babecc, -4px -4px 12px #ffffff;
+    transition: transform 0.2s ease;
+  }
+
+  .image-card:hover {
+    transform: scale(1.05);
+  }
+
+  .image-card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 20px;
+  }
+
+  .image-title {
+    text-align: center;
+    margin-top: 8px;
+    font-weight: bold;
+    color: #4b3f72;
+    font-size: 1em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+</style>
+{% endblock %}
