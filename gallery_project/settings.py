@@ -1,5 +1,7 @@
 from pathlib import Path
 import os
+import dj_database_url
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -14,7 +16,8 @@ SECRET_KEY = 'django-insecure-@tqt6$=k0psp5+w^=5=#aybcr9mdgn9w0u&%#(%k8(#_==9!)b
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 # Application definition
@@ -65,15 +68,9 @@ WSGI_APPLICATION = 'gallery_project.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'gallery_db',
-        'USER': 'root',
-        'PASSWORD': 'Maanoo@#$123',
-        'HOST': 'localhost',  # or your host
-        'PORT': '3306',
-    }
+    'default': dj_database_url.config(default='sqlite:///db.sqlite3')
 }
+
 
 
 
@@ -124,3 +121,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+import django_heroku
+django_heroku.settings(locals())
