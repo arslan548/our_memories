@@ -1,0 +1,171 @@
+{% extends 'gallery/base.html' %}
+
+{% block content %}
+<style>
+  .sparkle-bg {
+    display: none; /* Remove stripey bg */
+  }
+
+  .heart-float {
+    position: fixed;
+    bottom: -30px;
+    animation: floatHearts 10s linear infinite;
+    opacity: 0.4;
+    z-index: -1;
+    font-size: 2rem;
+    color: #e26ea0;
+  }
+
+  @keyframes floatHearts {
+    0% {
+      transform: translateY(100vh) rotate(0deg);
+    }
+    100% {
+      transform: translateY(-100vh) rotate(360deg);
+    }
+  }
+
+  /* Add as many as you want with different positions & delays */
+  .heart1 { left: 10%; animation-delay: 0s; }
+  .heart2 { left: 25%; animation-delay: 1s; }
+  .heart3 { left: 40%; animation-delay: 0s; }
+  .heart4 { left: 55%; animation-delay: 1s; }
+  .heart5 { left: 70%; animation-delay: 0s; }
+  .heart6 { left: 85%; animation-delay: 1s; }
+
+  .login-container {
+    max-width: 400px;
+    margin: 60px auto;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    background: #5e537d; /* Dark Lavender */
+    box-shadow: 6px 6px 12px #4c415f, -6px -6px 12px #7b6d8d; /* Soft shadow for neumorphism */
+    color: #e0d8f4; /* Light Lavender Text */
+  }
+
+  .title-login {
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    color: #e0d8f4; /* Lavender color for title */
+  }
+
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .login-label {
+    font-size: 1rem;
+    text-align: left;
+    font-weight: 600;
+    color: #e0d8f4; /* Light Lavender */
+  }
+
+  .login-input {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: inset 3px 3px 6px #d1cde1, inset -3px -3px 6px #ffffff;
+    background: #f2eaff; /* Lavender input background */
+    font-size: 1rem;
+    color: #333;
+  }
+
+  .login-button {
+    padding: 10px;
+    background: #e5d3f7; /* Lavender button background */
+    color: #4b3f72;
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 1rem;
+    box-shadow: 3px 3px 6px #ccc, -3px -3px 6px #fff;
+  }
+
+  .login-button:hover {
+    background: #d3baf0; /* Lighter lavender on hover */
+  }
+
+  .login-button::before {
+    content: '💖 ';
+  }
+
+  .error-message {
+    color: #e63946;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+  }
+
+  .homepage {
+    display: block;
+    margin-top: 15px;
+    color: #e0d8f4;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+  .homepage:hover {
+    color: #4b3f72;
+  }
+
+  @media (max-width: 600px) {
+    .login-container {
+      margin: 30px 20px;
+      padding: 20px;
+    }
+
+    .title-login {
+      font-size: 1.5rem;
+    }
+  }
+</style>
+
+<div class="sparkle-bg"></div>
+<div class="heart-float heart1">💗</div>
+<div class="heart-float heart2">💖</div>
+<div class="heart-float heart3">💞</div>
+<div class="heart-float heart4">💘</div>
+<div class="heart-float heart5">💓</div>
+<div class="heart-float heart6">💕</div>
+
+<div class="login-container">
+  <h2 class="title-login">Who Are We?</h2>
+  {% if error_message %}
+    <p class="error-message">{{ error_message }}</p>
+  {% endif %}
+
+  <form method="POST" class="login-form">
+    {% csrf_token %}
+    <label for="username" class="login-label">Our Name✨</label>
+    <input
+      type="text"
+      name="username"
+      id="username"
+      required
+      class="login-input"
+      placeholder="Only We Know✨"
+    />
+
+    <label for="password" class="login-label">Our Key 🔒</label>
+    <input
+      type="password"
+      name="password"
+      id="password"
+      required
+      class="login-input"
+      placeholder="Secret between us💫"
+    />
+
+    <button type="submit" class="login-button">Our Memories</button>
+    <a href="{% url 'home' %}" class="homepage">Back To Home!</a>
+  </form>
+</div>
+
+{% endblock %}

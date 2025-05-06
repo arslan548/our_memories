@@ -1,0 +1,109 @@
+{% extends 'gallery/base.html' %}
+
+{% block content %}
+
+<style>
+  .video-detail-container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 30px;
+    background: #fdfbff;
+    border-radius: 20px;
+    box-shadow: 6px 6px 12px #d1cde1, -6px -6px 12px #ffffff;
+    text-align: center;
+    color: #5d4a7a;
+  }
+
+  .video-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #6c4fa4;
+    margin-bottom: 30px;
+  }
+
+  .video-player {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 4px 4px 10px #d1cde1, -4px -4px 10px #ffffff;
+    margin: 0 auto;
+  }
+
+  .video-actions {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .neumorphic-btn {
+    background: #e5d3f7;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 4px 4px 8px #ccc, -4px -4px 8px #fff;
+    color: #4b3f72;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .neumorphic-btn:hover {
+    background-color: #d9b6f7;
+    transform: scale(1.03);
+  }
+
+  @media (max-width: 768px) {
+    .video-title {
+      font-size: 1.5rem;
+    }
+
+    .video-player {
+      aspect-ratio: 16 / 9;
+      height: auto;
+    }
+
+    .neumorphic-btn {
+      padding: 10px 20px;
+      font-size: 0.95rem;
+    }
+  }
+</style>
+
+<div class="video-detail-container">
+  <h2 class="video-title">{{ video.title }}</h2>
+
+  <div class="video-player">
+    {% if video.youtube_link %} 
+      {% with video.get_youtube_video_id as video_id %}
+        {% if video_id %}
+          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/{{ video_id }}" frameborder="0" allowfullscreen></iframe>
+        {% else %}
+          <p>Invalid YouTube link.</p>
+        {% endif %}
+      {% endwith %}
+    {% elif video.video_file %}
+      <video width="100%" height="100%" controls class="rounded">
+        <source src="{{ video.video_file.url }}" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    {% endif %}
+  </div>
+
+  <div class="video-actions">
+    {% if video.video_file %}
+      <a href="{{ video.video_file.url }}" download class="neumorphic-btn">Download</a>
+    {% endif %}
+<a href="{% url 'edit_video' video.id %}" class="neumorphic-btn">✏️ Edit Video</a>
+<a href="{% url 'videos' %}" class="neumorphic-btn">Go Back</a>
+  </div>
+</div>
+
+{% endblock %}

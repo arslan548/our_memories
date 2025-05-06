@@ -1,0 +1,75 @@
+{% extends 'gallery/base.html' %}
+
+{% block content %}
+
+<style>
+  .link-detail-container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 25px; /* Adjusted padding */
+    background: #fdfbff;
+    border-radius: 20px;
+    box-shadow: 6px 6px 12px #d1cde1, -6px -6px 12px #ffffff;
+    text-align: center;
+    color: #5d4a7a;
+    word-wrap: break-word;
+  }
+
+  .link-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #6c4fa4;
+    margin-bottom: 30px;
+  }
+
+  .link-actions {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .neumorphic-btn {
+    background: #e5d3f7;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 4px 4px 8px #ccc, -4px -4px 8px #fff;
+    color: #4b3f72;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .neumorphic-btn:hover {
+    background-color: #d9b6f7;
+    transform: scale(1.03);
+  }
+
+  @media (max-width: 768px) {
+    .link-title {
+      font-size: 1.5rem;
+    }
+
+    .neumorphic-btn {
+      padding: 10px 20px;
+      font-size: 0.95rem;
+    }
+  }
+</style>
+
+<div class="link-detail-container">
+  <h2 class="link-title">{{ link.title }}</h2>
+  <p>{{ link.description }}</p>
+  <div class="link-actions">
+    <a href="{{ link.url }}" class="neumorphic-btn">Visit Link</a>
+<a href="{% url 'edit_link' link.id %}" class="neumorphic-btn">✏️ Edit Link</a>
+<a href="{% url 'links' %}" class="neumorphic-btn">Go Back</a>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,135 @@
+{% extends 'gallery/base.html' %} 
+{% load static %} 
+{% block content %}
+
+<style>
+  h2 {
+    text-align: center;
+    color: #6c4fa4;
+    margin: 30px 0;
+  }
+
+  .link-controls {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .add-btn {
+    background: #e5d3f7;
+    padding: 12px 24px;
+    border-radius: 12px;
+    border: none;
+    box-shadow: 4px 4px 8px #ccc, -4px -4px 8px #fff;
+    font-weight: bold;
+    color: #4b3f72;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+
+  .add-btn:hover {
+    background-color: #d4b6f0;
+    transform: scale(1.05);
+  }
+
+  .links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 0 20px;
+    max-width: 1200px;
+    margin: 0 auto 50px;
+  }
+
+  .link-card {
+    background: #fdfbff;
+    border-radius: 18px;
+    padding: 30px;
+    box-shadow: 6px 6px 12px #d1cde1, -6px -6px 12px #ffffff;
+    cursor: pointer;
+    transition: 0.3s ease;
+    height: 250px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    word-wrap: break-word;
+  }
+
+  .link-card:hover {
+    transform: scale(1.02);
+  }
+
+  .link-card h3 {
+    font-size: 1.1rem;
+    color: #5a3e8e;
+    margin-bottom: 8px;
+  }
+
+  .link-card p {
+    font-size: 0.9rem;
+    color: #76669e;
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-bottom: 15px;
+  }
+
+  .visit-link {
+    background: #c3a5ec;
+    padding: 10px 20px;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    align-self: flex-start;
+    margin: 10px;
+  }
+
+  .visit-link:hover {
+    background: #a382d7;
+  }
+
+  @media (max-width: 600px) {
+    .link-card {
+      height: 180px;
+    }
+  }
+</style>
+
+<h2>Special Links 🔗</h2>
+
+<div class="link-controls">
+  <a href="{% url 'add_link' %}">
+    <button class="add-btn">Add New Link</button>
+  </a>
+</div>
+
+{% if links %}
+<div class="links-grid">
+  {% for link in links %}
+  <div
+    class="link-card"
+    onclick="location.href='{% url 'link_detail' link.id %}'"
+  >
+    <h3>{{ link.title }}</h3>
+    {% if link.description %}
+    <p>{{ link.description }}</p>
+    {% else %}
+    <p><em>No description provided.</em></p>
+    {% endif %}
+    <center>
+      <a
+        href="{{ link.url }}"
+        target="_blank"
+        class="visit-link"
+        onclick="event.stopPropagation();"
+        >Visit 🔗</a
+      >
+    </center>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<p style="text-align: center; color: #888">No links added yet 😢</p>
+{% endif %} 
+{% endblock %}

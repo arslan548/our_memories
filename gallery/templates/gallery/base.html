@@ -1,0 +1,210 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ArsMan's Memories</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: #3e3a58; /* Dark Lavender */
+        color: #dcd6e1; /* Light Lavender */
+      }
+
+      header {
+        background: #5e537d; /* Dark Lavender */
+        padding: 15px 20px;
+        box-shadow: inset 6px 6px 10px #4c415f, inset -6px -6px 10px #7b6d8d;
+        border-radius: 0 0 20px 20px;
+        position: relative;
+      }
+
+      .header-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .header-title {
+        flex-grow: 1;
+        text-align: center;
+      }
+
+      .header-title h1 {
+        font-size: 1.6rem;
+        color: #e0d8f4; /* Light Lavender */
+        font-weight: bold;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin: 0;
+      }
+
+      .hamburger {
+        font-size: 22px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #e0d8f4;
+        display: none;
+      }
+
+      .desktop-nav {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+        margin-top: 15px;
+      }
+
+      .link {
+        text-decoration: none;
+        color: #e0d8f4;
+        padding: 4px 8px;
+        transition: 0.3s;
+      }
+
+      .link:hover {
+        color: #b9a8d9; /* Lighter Lavender */
+      }
+
+      .side-nav {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 250px;
+        height: 100%;
+        background: #4c3f65; /* Dark Lavender */
+        box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        transition: 0.3s ease;
+        z-index: 999;
+      }
+
+      .side-nav.active {
+        left: 0;
+      }
+
+      .side-nav a {
+        display: block;
+        margin: 20px 0;
+        text-decoration: none;
+        color: #e0d8f4;
+        font-size: 18px;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 24px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #e0d8f4;
+      }
+
+      .unlock-link {
+        text-decoration: none;
+        display: block;
+        margin-top: 20px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 18px;
+        padding: 10px 30px;
+        border-radius: 25px;
+        border: none;
+        background: #5e537d; /* Dark Lavender */
+        box-shadow: 6px 6px 12px #4c415f, -6px -6px 12px #7b6d8d;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        color: #e0d8f4;
+      }
+
+      .unlock-link:hover {
+        box-shadow: inset 4px 4px 8px #4c415f, inset -4px -4px 8px #7b6d8d;
+      }
+
+      @media (max-width: 600px) {
+        .hamburger {
+          display: block;
+        }
+
+        .desktop-nav {
+          display: none;
+        }
+
+        .header-title h1 {
+          font-size: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      {% if user.is_authenticated %}
+      <div class="header-top">
+        <button class="hamburger" id="menuBtn">☰</button>
+        <div class="header-title">
+          <h1>ArsMan's Memories ❤️</h1>
+        </div>
+      </div>
+
+      <nav class="desktop-nav">
+        <a href="/" class="link">Home</a>
+        <a href="/images/" class="link">Images</a>
+        <a href="/videos/" class="link">Videos</a>
+        <a href="/links/" class="link">Links</a>
+        <a href="/notes/" class="link">Notes</a>
+        <a href="{% url 'logout' %}" class="link">Logout</a>
+      </nav>
+
+      <div class="side-nav" id="mobileMenu">
+        <button class="close-btn" id="closeBtn">✖</button>
+        <a href="/">Home</a>
+        <a href="/images/">Images</a>
+        <a href="/videos/">Videos</a>
+        <a href="/links/">Links</a>
+        <a href="/notes/">Notes</a>
+        <a href="{% url 'logout' %}">Logout</a>
+      </div>
+      {% else %}
+      <div class="header-title">
+        <h1>ArsMan's Memories ❤️</h1>
+      </div>
+      <a href="{% url 'login' %}" class="unlock-link">🔓 Unlock All The Memories !</a>
+      {% endif %}
+    </header>
+
+    {% block content %}{% endblock %}
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const menu = document.getElementById("mobileMenu");
+        const toggleBtn = document.getElementById("menuBtn");
+        const closeBtn = document.getElementById("closeBtn");
+
+        if (toggleBtn) {
+          toggleBtn.addEventListener("click", () => {
+            menu.classList.add("active");
+          });
+        }
+
+        if (closeBtn) {
+          closeBtn.addEventListener("click", () => {
+            menu.classList.remove("active");
+          });
+        }
+
+        const links = menu.querySelectorAll("a");
+        links.forEach((link) => {
+          link.addEventListener("click", () => {
+            menu.classList.remove("active");
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

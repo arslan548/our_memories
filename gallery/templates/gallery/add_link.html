@@ -1,0 +1,127 @@
+{% extends 'gallery/base.html' %} 
+{% block content %}
+
+<style>
+  .add-link-container {
+    max-width: 700px;
+    margin: 60px auto;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    background: #5e537d; /* Dark Lavender */
+    box-shadow: 6px 6px 12px #4c415f, -6px -6px 12px #7b6d8d; /* Soft shadow for neumorphism */
+    color: #e0d8f4; /* Light Lavender Text */
+  }
+
+  .add-link-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    color: #e0d8f4; /* Lavender color for title */
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+  }
+
+  label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: block;
+    font-size: 1rem;
+    color: #e0d8f4; /* Light Lavender */
+  }
+
+  input[type="text"],
+  input[type="url"],
+  input[type="textarea"] {
+    width: 90%;
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    background: #f0eef9;
+    box-shadow: inset 4px 4px 8px #d1cde1, inset -4px -4px 8px #ffffff;
+    font-size: 1rem;
+  }
+
+  form textarea {
+    width: 90%;
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    background: #f0eef9;
+    box-shadow: inset 4px 4px 8px #d1cde1, inset -4px -4px 8px #ffffff;
+    font-size: 1rem;
+  }
+
+  .neumorphic-btn {
+    padding: 12px 25px;
+    background: #e5d3f7;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 4px 4px 8px #ccc, -4px -4px 8px #fff;
+    color: #4b3f72;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 1rem;
+  }
+
+  .neumorphic-btn:hover {
+    background: #d9b6f7;
+  }
+
+  .back-link {
+    display: block;
+    margin-top: 15px;
+    color: #e0d8f4;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  .back-link:hover {
+    color: #4b3f72;
+  }
+
+  @media (max-width: 600px) {
+    .add-link-container {
+      margin: 30px 20px;
+      padding: 20px;
+    }
+
+    .add-link-container h2 {
+      font-size: 1.5rem;
+    }
+  }
+</style>
+
+<div class="add-link-container">
+  <h2>Add a Special Link</h2>
+
+  <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <div class="form-group">
+        <label for="id_title">Title</label>
+        {{ form.title }}
+      </div>
+
+      <div class="form-group">
+        <label for="id_url">URL</label>
+        {{ form.url }}
+      </div>
+
+      <div class="form-group">
+        <label for="id_description">Description (optional)</label>
+        {{ form.description }}
+      </div>
+
+      <button type="submit" class="neumorphic-btn">Save Link</button>
+  </form>
+
+  <div>
+    <a href="{% url 'links' %}" class="back-link">Back to Links</a>
+  </div>
+</div>
+
+{% endblock %}

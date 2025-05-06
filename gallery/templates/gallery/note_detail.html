@@ -1,0 +1,98 @@
+{% extends 'gallery/base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+  .note-detail-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    background: #fdfbff;
+    padding: 30px 15px;
+  }
+
+  .note-card {
+    max-width: 700px;
+    width: 100%;
+    padding: 30px;
+    background: #f0eef9;
+    border-radius: 20px;
+    box-shadow: 6px 6px 12px #d1cde1, -6px -6px 12px #ffffff;
+    text-align: center;
+    color: #4b3f72;
+  }
+
+  .note-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #6c4fa4;
+  }
+
+  .note-content {
+    font-size: 1.1rem;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin-bottom: 30px;
+    color: #5d4a7a;
+  }
+
+  .button-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  .action-button {
+    padding: 12px 25px;
+    background: #e5d3f7;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 4px 4px 8px #ccc, -4px -4px 8px #fff;
+    color: #4b3f72;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 1rem;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .action-button:hover {
+    background: #d9b6f7;
+  }
+
+  @media (max-width: 600px) {
+    .note-title {
+      font-size: 1.5rem;
+    }
+
+    .note-content {
+      font-size: 1rem;
+    }
+
+    .note-card {
+      padding: 20px;
+    }
+
+    .button-group {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+</style>
+
+<div class="note-detail-container">
+  <div class="note-card">
+    <h2 class="note-title">{{ note.title }}</h2>
+    <p class="note-content">{{ note.content }}</p>
+
+    <div class="button-group">
+      <a href="{% url 'edit_note' note.id %}" class="action-button">✏️ Edit Note</a>
+      <a href="{% url 'notes' %}" class="action-button">⬅️ Go Back</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

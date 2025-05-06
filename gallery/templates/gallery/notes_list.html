@@ -1,0 +1,26 @@
+{% extends 'gallery/base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/notes_list.css' %}">
+
+<h2 class="title">Sticky Notes Board 🧷</h2>
+<div class="div-center">
+  <a href="{% url 'add_note' %}">
+    <button class="button-add-note">➕ Add Note</button>
+  </a>
+</div>
+
+<div id="board">
+  {% for note in notes %}
+    <div class="note" data-note-id="{{ note.pk }}">
+      <a href="{% url 'note_detail' note.pk %}" class="note-link">
+        <h4>{{ note.title }}</h4>
+        <p>{{ note.content|truncatechars:50 }}</p>
+      </a>
+    </div>
+  {% empty %}
+    <p class="no-notes">No notes yet 😢</p>
+  {% endfor %}
+</div>
+
+{% endblock %}

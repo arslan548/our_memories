@@ -1,0 +1,107 @@
+{% extends 'gallery/base.html' %}
+
+{% block content %}
+<style>
+  .edit-note-container {
+    max-width: 700px;
+    margin: 60px auto;
+    padding: 30px;
+    background: #fdfbff;
+    border-radius: 20px;
+    box-shadow: 6px 6px 12px #d1cde1, -6px -6px 12px #ffffff;
+    text-align: center;
+    color: #4b3f72;
+  }
+
+  .edit-note-container h2 {
+    font-size: 2rem;
+    color: #6c4fa4;
+    margin-bottom: 30px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+  }
+
+  label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+    color: #5d4a7a;
+  }
+
+  input[type="text"],
+  textarea {
+    width: 90%;
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    background: #f0eef9;
+    box-shadow: inset 4px 4px 8px #d1cde1, inset -4px -4px 8px #ffffff;
+    font-size: 1rem;
+    color: #4b3f72;
+  }
+
+  .neumorphic-btn {
+    padding: 12px 25px;
+    background: #e5d3f7;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 4px 4px 8px #ccc, -4px -4px 8px #fff;
+    color: #4b3f72;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+
+  .neumorphic-btn:hover {
+    background: #d9b6f7;
+  }
+
+  .cancel-link {
+    display: inline-block;
+    margin-top: 20px;
+    color: #6c4fa4;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .cancel-link:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 600px) {
+    .edit-note-container {
+      margin: 30px 20px;
+      padding: 20px;
+    }
+
+    .edit-note-container h2 {
+      font-size: 1.5rem;
+    }
+  }
+</style>
+
+<div class="edit-note-container">
+  <h2>Edit Note ✏️</h2>
+
+  <form method="POST">
+    {% csrf_token %}
+    {% for field in form %}
+      <div class="form-group">
+        {{ field.label_tag }}
+        <center>{{ field }}</center>
+        {% if field.errors %}
+          <div style="color: red;">{{ field.errors }}</div>
+        {% endif %}
+      </div>
+    {% endfor %}
+    <button type="submit" class="neumorphic-btn">💾 Save Changes</button>
+  </form>
+
+  <a href="{% url 'notes' %}" class="cancel-link">✖ Cancel</a>
+</div>
+{% endblock %}

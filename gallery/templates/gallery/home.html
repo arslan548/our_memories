@@ -1,0 +1,62 @@
+{% extends 'gallery/base.html' %} 
+{% block content %}
+<style>
+  .home-container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #5e537d; /* Dark Lavender */
+    border-radius: 20px;
+    box-shadow: 6px 6px 12px #4c415f, -6px -6px 12px #7b6d8d;
+    text-align: center;
+    color: #e0d8f4; /* Light Lavender */
+    animation: fadeIn 1s ease-in-out;
+  }
+
+  .home-container h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: #e0d8f4; /* Light Lavender */
+  }
+
+  .home-container p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #dcd6e1; /* Very Light Lavender */
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .home-container {
+      margin: 20px;
+      padding: 15px;
+    }
+
+    .home-container h2 {
+      font-size: 1.5rem;
+    }
+
+    .home-container p {
+      font-size: 1rem;
+    }
+  }
+</style>
+
+<div class="home-container">
+  <h2>Welcome Here! ❤️✨</h2>
+  <p>
+    You are in a magical place 💞 where you can find all the memories we have
+    made together 💝.
+  </p>
+</div>
+{% endblock %}

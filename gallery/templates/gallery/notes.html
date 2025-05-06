@@ -1,0 +1,117 @@
+{% extends 'gallery/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+  .title {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 2rem;
+    color: #6c4fa4;
+  }
+
+  .div-center {
+    text-align: center;
+    margin: 20px;
+  }
+
+  .button-add-note {
+    padding: 12px 25px;
+    background: #e5d3f7;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 4px 4px 8px #ccc, -4px -4px 8px #fff;
+    color: #4b3f72;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s;
+  }
+
+  .button-add-note:hover {
+    background: #d9b6f7;
+  }
+
+  #board {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 20px;
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 10px;
+  }
+
+  .note {
+    background: #f0eef9;
+    border-radius: 15px;
+    box-shadow: 6px 6px 12px #d1cde1, -6px -6px 12px #ffffff;
+    padding: 15px;
+    height: 160px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: 0.3s ease;
+  }
+
+  .note:hover {
+    transform: scale(1.03);
+  }
+
+  .note-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .note h4 {
+    font-size: 1.1rem;
+    color: #6c4fa4;
+    margin-bottom: 10px;
+  }
+
+  .note p {
+    font-size: 0.95rem;
+    color: #4b3f72;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 90px;
+  }
+
+  .no-notes {
+    text-align: center;
+    color: #9a8bbf;
+    font-style: italic;
+    margin-top: 40px;
+  }
+
+  @media (max-width: 600px) {
+    .note {
+      height: 150px;
+    }
+  }
+</style>
+
+<h2 class="title">Sticky Notes Board 🧷</h2>
+
+<div class="div-center">
+  <a href="{% url 'add_note' %}">
+    <button class="button-add-note">➕ Add Note</button>
+  </a>
+</div>
+
+<div id="board">
+  {% for note in notes %}
+    <div class="note" data-note-id="{{ note.pk }}">
+      <a href="{% url 'note_detail' note.pk %}" class="note-link">
+        <h4>{{ note.title }}</h4>
+        <p>{{ note.content|default:"(No Content)" }}</p>
+      </a>
+    </div>
+  {% empty %}
+    <p class="no-notes">No notes yet 😢</p>
+  {% endfor %}
+</div>
+
+{% endblock %}
