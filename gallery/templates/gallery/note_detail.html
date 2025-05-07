@@ -8,7 +8,7 @@
     justify-content: center;
     align-items: center;
     min-height: 80vh;
-    background: #fdfbff;
+    background: #4a4460; /* Darker Lavender */
     padding: 30px 15px;
   }
 
@@ -16,17 +16,19 @@
     max-width: 700px;
     width: 100%;
     padding: 30px;
-    background: #f0eef9;
+    background: #3f3753;
     border-radius: 20px;
-    box-shadow: 6px 6px 12px #d1cde1, -6px -6px 12px #ffffff;
+    /* Removed box-shadow */
     text-align: center;
-    color: #4b3f72;
+    color: #e0d8f4;
+    outline: 2px solid #6c5ca3; /* Solid outline */
+    word-wrap: break-word;
   }
 
   .note-title {
     font-size: 2rem;
     margin-bottom: 20px;
-    color: #6c4fa4;
+    color: #b9a8d9;
   }
 
   .note-content {
@@ -34,7 +36,7 @@
     white-space: pre-wrap;
     word-wrap: break-word;
     margin-bottom: 30px;
-    color: #5d4a7a;
+    color: #dcd6e1;
   }
 
   .button-group {
@@ -46,21 +48,24 @@
 
   .action-button {
     padding: 12px 25px;
-    background: #e5d3f7;
+    background: #6c5ca3;
     border: none;
     border-radius: 12px;
-    box-shadow: 4px 4px 8px #ccc, -4px -4px 8px #fff;
-    color: #4b3f72;
+    /* Removed box-shadow */
+    color: #e0d8f4;
     font-weight: bold;
     cursor: pointer;
     transition: 0.3s;
     font-size: 1rem;
     text-decoration: none;
     display: inline-block;
+    outline: 2px solid #6c5ca3; /* Solid outline */
+    min-width: 120px;
+    text-align: center;
   }
 
   .action-button:hover {
-    background: #d9b6f7;
+    background: #7a6db8;
   }
 
   @media (max-width: 600px) {
@@ -79,6 +84,7 @@
     .button-group {
       flex-direction: column;
       gap: 10px;
+      align-items: center;
     }
   }
 </style>

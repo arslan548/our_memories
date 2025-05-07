@@ -17,15 +17,16 @@
     max-width: 500px;
     margin: auto;
     padding: 25px;
-    background: #5e537d; /* Dark Lavender */
+    background: #4a4460; /* Darker Lavender */
     border-radius: 20px;
-    box-shadow: 6px 6px 12px #4c415f, -6px -6px 12px #7b6d8d; /* Soft shadow for neumorphism */
+    /* Removed box-shadow */
     color: #e0d8f4; /* Light Lavender Text */
+    outline: 2px solid #6c5ca3; /* Solid outline */
   }
 
   .form-group {
     margin-bottom: 20px;
-    color: #5d4a7a; /* Dark Lavender */
+    color: #b9a8d9; /* Light Lavender */
   }
 
   label {
@@ -42,26 +43,29 @@
     padding: 12px;
     border: none;
     border-radius: 12px;
-    background: #f2eaff; /* Light Lavender */
-    box-shadow: inset 4px 4px 8px #d1cde1, inset -4px -4px 8px #ffffff;
+    background: #3f3753; /* Darker Lavender */
+    /* Removed box-shadow */
     font-size: 1rem;
+    color: #dcd6e1;
+    outline: 2px solid #6c5ca3; /* Solid outline */
   }
 
   button[type="submit"] {
-    background: #e5d3f7; /* Light Lavender */
+    background: #6c5ca3; /* Dark Lavender */
     padding: 12px 25px;
     border: none;
     border-radius: 12px;
-    box-shadow: 4px 4px 8px #ccc, -4px -4px 8px #fff;
-    color: #4b3f72; /* Dark Lavender */
+    /* Removed box-shadow */
+    color: #e0d8f4; /* Light Lavender */
     font-weight: bold;
     font-size: 1rem;
     cursor: pointer;
     transition: 0.3s ease;
+    outline: 2px solid #6c5ca3; /* Solid outline */
   }
 
   button[type="submit"]:hover {
-    background-color: #d9b6f7;
+    background-color: #7a6db8;
     transform: scale(1.03);
   }
 
@@ -75,12 +79,14 @@
   }
 
   .video-card {
-    background: #fdfbff;
+    background: #3f3753; /* Darker Lavender */
     border-radius: 18px;
-    box-shadow: 6px 6px 12px #d1cde1, -6px -6px 12px #ffffff;
+    /* Removed box-shadow */
     overflow: hidden;
     transition: transform 0.3s ease;
     text-align: center;
+    text-decoration: none;
+    outline: 2px solid #6c5ca3; /* Solid outline */
   }
 
   .video-card:hover {
@@ -98,13 +104,15 @@
 
   .video-info {
     padding: 12px;
-    color: #5d4a7a; /* Dark Lavender */
+    color: #b9a8d9; /* Light Lavender */
+    text-decoration: none;
   }
 
   .video-title {
     font-size: 1.1rem;
     font-weight: bold;
     margin-bottom: 6px;
+    text-decoration: none;
   }
 
   .video-type {

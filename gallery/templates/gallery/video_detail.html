@@ -1,108 +1,108 @@
 {% extends 'gallery/base.html' %}
-
 {% block content %}
 
 <style>
   .video-detail-container {
-    max-width: 900px;
-    margin: 50px auto;
+    max-width: 700px;
+    margin: 40px auto;
     padding: 30px;
-    background: #fdfbff;
+    background: #4a4460; /* Darker Lavender */
     border-radius: 20px;
-    box-shadow: 6px 6px 12px #d1cde1, -6px -6px 12px #ffffff;
+    /* Removed box-shadow */
     text-align: center;
-    color: #5d4a7a;
+    color: #e0d8f4;
+    outline: 2px solid #6c5ca3; /* Solid outline */
   }
 
-  .video-title {
+  .video-detail-container h2 {
     font-size: 2rem;
+    margin-bottom: 25px;
     font-weight: bold;
-    color: #6c4fa4;
-    margin-bottom: 30px;
+    color: #b9a8d9;
   }
 
-  .video-player {
+  .video-detail-container video {
     width: 100%;
-    max-width: 100%;
     height: auto;
-    aspect-ratio: 16 / 9;
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 4px 4px 10px #d1cde1, -4px -4px 10px #ffffff;
-    margin: 0 auto;
+    border-radius: 15px;
+    /* Removed box-shadow */
+    margin-bottom: 25px;
+    outline: 2px solid #6c5ca3; /* Solid outline */
   }
 
   .video-actions {
-    margin-top: 30px;
     display: flex;
     justify-content: center;
-    gap: 20px;
     flex-wrap: wrap;
+    gap: 15px;
   }
 
   .neumorphic-btn {
-    background: #e5d3f7;
-    padding: 12px 30px;
+    padding: 10px 25px;
+    background: #6c5ca3;
     border: none;
+    width: 100%; /* Remove width 100% to prevent overlap */
     border-radius: 12px;
-    box-shadow: 4px 4px 8px #ccc, -4px -4px 8px #fff;
-    color: #4b3f72;
+    color: #e0d8f4;
     font-weight: bold;
-    font-size: 1rem;
     cursor: pointer;
-    transition: 0.3s ease;
+    font-size: 1rem;
+    transition: all 0.3s ease;
     text-decoration: none;
     display: inline-block;
+    outline: 2px solid #6c5ca3; /* Solid outline */
+    min-width: 120px; /* Ensure buttons have minimum width */
+    text-align: center;
+    margin-top: 10px;
   }
 
   .neumorphic-btn:hover {
-    background-color: #d9b6f7;
+    background: #7a6db8;
     transform: scale(1.03);
   }
 
+  .back-btn {
+    background-color: #5e537d;
+    margin-top: 10px;
+    outline: 2px solid #6c5ca3; /* Solid outline */
+  }
+
   @media (max-width: 768px) {
-    .video-title {
+    .video-detail-container {
+      margin: 20px 15px;
+      padding: 20px;
+    }
+
+    .video-detail-container h2 {
       font-size: 1.5rem;
     }
 
-    .video-player {
-      aspect-ratio: 16 / 9;
-      height: auto;
+    .neumorphic-btn {
+      width: auto; /* Remove fixed width */
+      min-width: 100px;
+      text-align: center;
     }
 
-    .neumorphic-btn {
-      padding: 10px 20px;
-      font-size: 0.95rem;
+    .video-actions {
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
     }
   }
 </style>
 
 <div class="video-detail-container">
-  <h2 class="video-title">{{ video.title }}</h2>
-
-  <div class="video-player">
-    {% if video.youtube_link %} 
-      {% with video.get_youtube_video_id as video_id %}
-        {% if video_id %}
-          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/{{ video_id }}" frameborder="0" allowfullscreen></iframe>
-        {% else %}
-          <p>Invalid YouTube link.</p>
-        {% endif %}
-      {% endwith %}
-    {% elif video.video_file %}
-      <video width="100%" height="100%" controls class="rounded">
-        <source src="{{ video.video_file.url }}" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-    {% endif %}
-  </div>
-
+  <h2>{{ video.title }}</h2>
+  <video controls>
+    <source src="{{ video.video.url }}" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
   <div class="video-actions">
-    {% if video.video_file %}
-      <a href="{{ video.video_file.url }}" download class="neumorphic-btn">Download</a>
-    {% endif %}
-<a href="{% url 'edit_video' video.id %}" class="neumorphic-btn">✏️ Edit Video</a>
-<a href="{% url 'videos' %}" class="neumorphic-btn">Go Back</a>
+    <center>
+      <a href="{{ video.video.url }}" download class="neumorphic-btn">❤️ Download</a>
+      <a href="{% url 'edit_video' video.id %}" class="neumorphic-btn">✏️ Edit Video</a>
+      <a href="{% url 'videos' %}" class="neumorphic-btn back-btn">🔙 Go Back</a>
+    </center>
   </div>
 </div>
 

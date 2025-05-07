@@ -18,19 +18,20 @@
 
   .button-add-note {
     padding: 12px 25px;
-    background: #e5d3f7;
+    background: #6c5ca3;
     border: none;
     border-radius: 12px;
-    box-shadow: 4px 4px 8px #ccc, -4px -4px 8px #fff;
-    color: #4b3f72;
+    /* Removed box-shadow */
+    color: #e0d8f4;
     font-weight: bold;
     cursor: pointer;
     font-size: 1rem;
     transition: 0.3s;
+    outline: 2px solid #6c5ca3; /* Solid outline */
   }
 
   .button-add-note:hover {
-    background: #d9b6f7;
+    background: #7a6db8;
   }
 
   #board {
@@ -43,9 +44,9 @@
   }
 
   .note {
-    background: #f0eef9;
+    background: #3f3753;
     border-radius: 15px;
-    box-shadow: 6px 6px 12px #d1cde1, -6px -6px 12px #ffffff;
+    /* Removed box-shadow */
     padding: 15px;
     height: 160px;
     overflow: hidden;
@@ -53,6 +54,7 @@
     flex-direction: column;
     justify-content: space-between;
     transition: 0.3s ease;
+    outline: 2px solid #6c5ca3; /* Solid outline */
   }
 
   .note:hover {
@@ -66,13 +68,13 @@
 
   .note h4 {
     font-size: 1.1rem;
-    color: #6c4fa4;
+    color: #b9a8d9;
     margin-bottom: 10px;
   }
 
   .note p {
     font-size: 0.95rem;
-    color: #4b3f72;
+    color: #9a8fbf;
     word-wrap: break-word;
     overflow: hidden;
     text-overflow: ellipsis;

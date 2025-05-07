@@ -6,16 +6,17 @@
     max-width: 700px;
     margin: 60px auto;
     padding: 30px;
-    background: #fdfbff;
+    background: #4a4460; /* Darker Lavender */
     border-radius: 20px;
-    box-shadow: 6px 6px 12px #d1cde1, -6px -6px 12px #ffffff;
+    /* Removed box-shadow */
     text-align: center;
-    color: #4b3f72;
+    color: #e0d8f4;
+    outline: 2px solid #6c5ca3; /* Solid outline */
   }
 
   .add-note-container h2 {
     font-size: 2rem;
-    color: #6c4fa4;
+    color: #e0d8f4;
     margin-bottom: 30px;
   }
 
@@ -28,7 +29,7 @@
     font-weight: bold;
     margin-bottom: 8px;
     display: block;
-    color: #5d4a7a;
+    color: #e0d8f4;
   }
 
   input[type="text"],
@@ -37,31 +38,42 @@
     padding: 12px;
     border: none;
     border-radius: 12px;
-    background: #f0eef9;
-    box-shadow: inset 4px 4px 8px #d1cde1, inset -4px -4px 8px #ffffff;
+    background: #3f3753; /* Darker Lavender Background */
+    /* Removed box-shadow */
     font-size: 1rem;
+    color: #dcd6e1;
+    outline: 2px solid #6c5ca3; /* Solid outline */
   }
 
   .neumorphic-btn {
     padding: 12px 25px;
-    background: #e5d3f7;
+    background: #6c5ca3;
     border: none;
     border-radius: 12px;
-    box-shadow: 4px 4px 8px #ccc, -4px -4px 8px #fff;
-    color: #4b3f72;
+    /* Removed box-shadow */
+    color: #e0d8f4;
     font-weight: bold;
     cursor: pointer;
     transition: 0.3s;
     font-size: 1rem;
+    outline: 2px solid #6c5ca3; /* Solid outline */
   }
 
   .neumorphic-btn:hover {
-    background: #d9b6f7;
+    background: #7a6db8;
   }
 
   .back-link {
     margin-top: 20px;
     display: inline-block;
+    color: #e0d8f4;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+  .back-link:hover {
+    color: #4b3f72;
   }
 
   @media (max-width: 600px) {

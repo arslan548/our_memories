@@ -9,16 +9,17 @@
       body {
         margin: 0;
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background: #3e3a58; /* Dark Lavender */
+        background: #2c2a3c; /* Darker Lavender */
         color: #dcd6e1; /* Light Lavender */
       }
 
       header {
-        background: #5e537d; /* Dark Lavender */
+        background: #4a4460; /* Darker Lavender */
         padding: 15px 20px;
-        box-shadow: inset 6px 6px 10px #4c415f, inset -6px -6px 10px #7b6d8d;
+        /* Removed box-shadow */
         border-radius: 0 0 20px 20px;
         position: relative;
+        outline: 2px solid #6c5ca3; /* Solid outline */
       }
 
       .header-top {
@@ -49,6 +50,7 @@
         cursor: pointer;
         color: #e0d8f4;
         display: none;
+        outline: 2px solid transparent;
       }
 
       .desktop-nav {
@@ -76,11 +78,12 @@
         left: -100%;
         width: 250px;
         height: 100%;
-        background: #4c3f65; /* Dark Lavender */
-        box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+        background: #3f3753; /* Darker Lavender */
+        /* Removed box-shadow */
         padding: 20px;
         transition: 0.3s ease;
         z-index: 999;
+        outline: 2px solid #6c5ca3; /* Solid outline */
       }
 
       .side-nav.active {
@@ -116,15 +119,16 @@
         padding: 10px 30px;
         border-radius: 25px;
         border: none;
-        background: #5e537d; /* Dark Lavender */
-        box-shadow: 6px 6px 12px #4c415f, -6px -6px 12px #7b6d8d;
+        background: #4a4460; /* Darker Lavender */
+        /* Removed box-shadow */
         cursor: pointer;
         transition: all 0.3s ease;
         color: #e0d8f4;
+        outline: 2px solid #6c5ca3; /* Solid outline */
       }
 
       .unlock-link:hover {
-        box-shadow: inset 4px 4px 8px #4c415f, inset -4px -4px 8px #7b6d8d;
+        /* Removed box-shadow */
       }
 
       @media (max-width: 600px) {
